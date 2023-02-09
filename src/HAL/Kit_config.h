@@ -1,0 +1,9 @@
+#ifndef KIT_CONFIG_H_INCLUDED
+#define KIT_CONFIG_H_INCLUDED
+
+
+#define AMIT_KIT
+// #define FARES_KIT
+// #define PROJECT_CONNECTIONS
+
+#endif // KIT_CONFIG_H_INCLUDED
