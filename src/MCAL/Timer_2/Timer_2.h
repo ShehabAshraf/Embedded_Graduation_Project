@@ -17,10 +17,10 @@
 
 // #define Timer_2_Output_Compare_Mode 0
 /*Timer 2 Output_Compare Modes (Default = Normal)*/
-#define OCV_0_Normal  0
-#define OCV_0_Toggle  1
-#define OCV_0_Clear   2
-#define OCV_0_Set     3
+#define OCV_2_Normal  0
+#define OCV_2_Toggle  1
+#define OCV_2_Clear   2
+#define OCV_2_Set     3
 
 /*Vector Table (P 44)*/
 void __vector_5(void) __attribute__((signal, used)); //OverFlow 
@@ -35,6 +35,14 @@ void Timer_2_INIT_With_OCV(u8 WAVEFORM_MODE, u8 TIMER_2_OUTPUT_COMPARE_MODE, u8 
 void Timer_2_OverFlow_Int_Enable(void);
 void Timer_2_Output_Compare_Int_Enable(void);
 
+void Timer_2_OverFlow_Int_Disable(void);
+void Timer_2_Output_Compare_Int_Disable(void);
+
+void Timer_2_PWM   (u8 Timer_2_OCV);    //Changes OCV in OCR
+
+
+void Timer_2_OverFlow_CallBack(void(*ptrfcn)(void));
+void Timer_2_Output_Compare_CallBack(void(*ptrfcn)(void));
 
 #endif
 

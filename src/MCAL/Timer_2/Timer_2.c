@@ -4,6 +4,9 @@
 void Timer_2_INIT_With_OCV(u8 WAVEFORM_MODE, u8 TIMER_2_OUTPUT_COMPARE_MODE, u8 TIMER_2_OCV)
 {
 
+    SET_BIT(TIFR,TOV2);
+    SET_BIT(TIFR,OCF2);
+
     /*Selecting WaveForm Mode*/
     switch (WAVEFORM_MODE)
     {
@@ -29,28 +32,28 @@ void Timer_2_INIT_With_OCV(u8 WAVEFORM_MODE, u8 TIMER_2_OUTPUT_COMPARE_MODE, u8 
 
     /*Setting Prescaler (/1024)*/
     SET_BIT(TCCR2,CS20);
-    CLR_BIT(TCCR2,CS21);
+    SET_BIT(TCCR2,CS21);
     SET_BIT(TCCR2,CS22);
 
     /*Selecting Output compare mode*/
     switch (TIMER_2_OUTPUT_COMPARE_MODE)
     {
-        case OCV_0_Normal:
+        case OCV_2_Normal:
             CLR_BIT(TCCR2,COM20);
             CLR_BIT(TCCR2,COM21);
             break;
-        case OCV_0_Toggle:
+        case OCV_2_Toggle:
             if (WAVEFORM_MODE == CTC)
             {
                 SET_BIT(TCCR2,COM20);
                 CLR_BIT(TCCR2,COM21);
             }
             break;
-        case OCV_0_Clear:
+        case OCV_2_Clear:
             CLR_BIT(TCCR2,COM20);
             SET_BIT(TCCR2,COM21);
             break;
-        case OCV_0_Set:
+        case OCV_2_Set:
             SET_BIT(TCCR2,COM20);
             SET_BIT(TCCR2,COM21);
             break;
@@ -97,3 +100,41 @@ void Timer_2_Output_Compare_Int_Disable(void)
 }
 
 
+void Timer_2_PWM   (u8 Timer_2_OCV)
+{
+    OCR2 = Timer_2_OCV;
+}
+
+
+
+void (*Timer_2_OV_Genptr) (void) = NULL_PTR;
+
+void Timer_2_OverFlow_CallBack(void(*ptrfcn)(void))
+{
+    if (ptrfcn != NULL_PTR)
+    {
+        Timer_2_OV_Genptr = ptrfcn;
+    }
+}
+
+void __vector_5(void)
+{
+    Timer_2_OV_Genptr();
+}
+
+
+
+void (*Timer_2_OC_Genptr) (void) = NULL_PTR;
+
+void Timer_2_Output_Compare_CallBack(void(*ptrfcn)(void))
+{
+    if (ptrfcn != NULL_PTR)
+    {
+        Timer_2_OC_Genptr = ptrfcn;
+    }
+}
+
+void __vector_4(void)
+{
+    Timer_2_OC_Genptr();
+}

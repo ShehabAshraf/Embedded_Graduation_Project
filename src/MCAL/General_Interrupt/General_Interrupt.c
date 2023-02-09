@@ -7,5 +7,5 @@ void GIE_voidEnable(void)
 
 void GIE_voidDisable(void)
 {
-    CLEAR_BIT(SREG,SREG_I);
+    CLR_BIT(SREG,SREG_I);
 }

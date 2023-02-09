@@ -45,19 +45,19 @@ void EXT_INT0_void_Disable(void)
     CLR_BIT(GICR,INT0);
 }
 
-void (*Genptr) (void) = NULL_PTR;
+void (*Genptr_0) (void) = NULL_PTR;
 
 
 void EXT_INT0_CallBackFunction(void(*ptrfcn)(void))
 {
     if (ptrfcn != NULL_PTR)
     {
-        Genptr = ptrfcn;
+        Genptr_0 = ptrfcn;
     }
     
 }
 
 void __vector_1(void)
 {
-    Genptr();
+    Genptr_0();
 }
