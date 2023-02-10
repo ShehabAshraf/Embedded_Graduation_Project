@@ -4,7 +4,7 @@
 
 
 
-void Timer_1_INIT_With_OCV(u8 WAVEFORM_MODE, u8 TIMER_1_OUTPUT_COMPARE_MODE_A, u8 TIMER_1_OUTPUT_COMPARE_MODE_B, u8 TIMER_1_OCV_A,  u8 TIMER_1_OCV_B)
+void Timer_1_INIT_With_OCV(u8 WAVEFORM_MODE, u8 TIMER_1_OUTPUT_COMPARE_MODE_A, u8 TIMER_1_OUTPUT_COMPARE_MODE_B, u16 TIMER_1_OCV_A,  u16 TIMER_1_OCV_B)
 {
 
     /*Setting all flags to clear it*/
@@ -77,7 +77,7 @@ void Timer_1_INIT_With_OCV(u8 WAVEFORM_MODE, u8 TIMER_1_OUTPUT_COMPARE_MODE_A, u
     }
 
     /*Selecting Output compare mode B*/
-    switch (TIMER_1_OUTPUT_COMPARE_MODE_A)
+    switch (TIMER_1_OUTPUT_COMPARE_MODE_B)
     {
         case OCV_1_Normal:
             CLR_BIT(TCCR1B,COM1B0);
@@ -109,9 +109,14 @@ void Timer_1_INIT_With_OCV(u8 WAVEFORM_MODE, u8 TIMER_1_OUTPUT_COMPARE_MODE_A, u
 
 
     /*Make Output Compare Reg = Value Needed*/
-    OCR1AL = TIMER_1_OCV_A;      // Must do If TIMER_1_OCV_A > 8 Bits shift it to TCNT1AH
-    OCR1BL = TIMER_1_OCV_B;      // Must do If TIMER_1_OCV_B > 8 Bits shift it to TCNT1BH
-
+    // Taking 16 Bits and having 2 (8 bit) Regs 
+    // 8 bits right will put in L
+    // 8 Bits left will put in H
+    OCR1BL = (TIMER_1_OCV_B);      
+    OCR1BH = (TIMER_1_OCV_B >>8);
+    OCR1AL = (TIMER_1_OCV_A);
+    OCR1AH = (TIMER_1_OCV_A >> 8);
+    
 }
 
 
@@ -171,8 +176,17 @@ void Timer_1_Input_Capture_Int_Disable(void)
     CLR_BIT(TIFR,ICF1);
 }
 
-void Timer_1_PWM   (u8 Timer_1_OCV);    //Changes OCV in OCR1
+void Timer_1_PWM_A   (u16 Timer_1_OCV_A)
+{
+    OCR1AL = (Timer_1_OCV_A);
+    OCR1AH = (Timer_1_OCV_A >> 8);
+}    //Changes OCV in OCR1
 
+void Timer_1_PWM_B   (u16 Timer_1_OCV_B)
+{
+    OCR1BL = (Timer_1_OCV_B);      
+    OCR1BH = (Timer_1_OCV_B >>8);
+}
 
 void (*Timer_1_OV_Genptr) (void) = NULL_PTR;
 void (*Timer_1_IC_Genptr) (void) = NULL_PTR;
