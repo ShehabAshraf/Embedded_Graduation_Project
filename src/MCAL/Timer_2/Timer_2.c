@@ -87,14 +87,14 @@ void Timer_2_Output_Compare_Int_Enable(void)
 
 void Timer_2_OverFlow_Int_Disable(void)
 {
-    GIE_voidEnable();
+    GIE_voidDisable();
     CLR_BIT(TIMSK,TOIE2);
     CLR_BIT(TIFR,TOV2);
 }
 
 void Timer_2_Output_Compare_Int_Disable(void)
 {
-    GIE_voidEnable();
+    GIE_voidDisable();
     CLR_BIT(TIMSK,OCIE2);
     CLR_BIT(TIFR,OCF2);
 }
