@@ -51,7 +51,7 @@ void OC2IntFn()
     }
     else if (OVFcntr == 1)
     {
-        // OCR2 = MAP(angl, 0, 180, 200, 231.25);
+        OCR2 = MAP(angl, 0, 180, 200, 231.25);
         // TCNT2 = 200;
 
 
@@ -61,14 +61,15 @@ void OV2IntFn(void)
 {
     if (OVFcntr == 0)
     {
-        OCR2 = 0;
+        // OCR2 = 0;
         OVFcntr = 1;
+        TCNT2 = 0x00;
     }
     else if (OVFcntr == 1)
     {
         TCNT2 = 200;
         OVFcntr = 0;
-        OCR2 = MAP(angl, 0, 180, 200, 231.25);
+        // OCR2 = MAP(angl, 0, 180, 200, 231.25);
     }
 }
 
