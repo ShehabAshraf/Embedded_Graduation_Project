@@ -1,15 +1,16 @@
 #include "Alarm.h"
 
-
-
-float32 i = 0;
+float64 i = 0;
 
 void Alarm_Init(void)
 {
     DIO_PinMode(DIO_A3,OUTPUT);
-    Timer_2_INIT_With_OCV(Normal,OCV_2_Normal,255);
-    Timer_2_OverFlow_Int_Enable();
-    Timer_2_OverFlow_CallBack(Alarm_Cycle);
+    // Timer_2_INIT_With_OCV(Normal,OCV_2_Normal,255);
+    // Timer_2_OverFlow_Int_Enable();
+    // Timer_2_OverFlow_CallBack(Alarm_Cycle);
+    Timer_1_INIT_With_OCV(Normal,OCV_1_Normal,OCV_1_Normal,65536,0);
+    Timer_1_OverFlow_Int_Enable();
+    Timer_1_OverFlow_CallBack(Alarm_Cycle);
 }
 
 
@@ -37,7 +38,7 @@ void Alarm_Cycle(void)
     // _delay_ms(500);
 
 
-    if (i < 183)
+    if (i < 733)
     {
         i++;
 

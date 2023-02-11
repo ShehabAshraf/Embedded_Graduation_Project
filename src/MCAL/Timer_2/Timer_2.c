@@ -119,6 +119,7 @@ void Timer_2_OverFlow_CallBack(void(*ptrfcn)(void))
 
 void __vector_5(void)
 {
+    SET_BIT(TIFR,TOV2);
     Timer_2_OV_Genptr();
 }
 
@@ -136,5 +137,6 @@ void Timer_2_Output_Compare_CallBack(void(*ptrfcn)(void))
 
 void __vector_4(void)
 {
+    SET_BIT(TIFR,OCF2);
     Timer_2_OC_Genptr();
 }

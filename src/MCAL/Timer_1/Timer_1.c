@@ -46,8 +46,8 @@ void Timer_1_INIT_With_OCV(u8 WAVEFORM_MODE, u8 TIMER_1_OUTPUT_COMPARE_MODE_A, u
 
     /*Setting Prescaler (/1024)*/
     SET_BIT(TCCR1B,CS10);
-    SET_BIT(TCCR1B,CS11);
-    SET_BIT(TCCR1B,CS12);
+    CLR_BIT(TCCR1B,CS11);
+    CLR_BIT(TCCR1B,CS12);
 
 
     /*Selecting Output compare mode A*/

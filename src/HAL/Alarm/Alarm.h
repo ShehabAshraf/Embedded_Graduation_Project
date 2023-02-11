@@ -1,6 +1,7 @@
 /*Alarm means Buzzer*/
 #include "../../MCAL/DIO/DIO.h"
 #include "../../MCAL/Timer_2/Timer_2.h"
+#include "../../MCAL//Timer_1/Timer_1.h"
 #include <util/delay.h>
 
 
