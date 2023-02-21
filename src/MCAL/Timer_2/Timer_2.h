@@ -3,6 +3,7 @@
 #include "../Ext_Interrupt/EXT_Interrupt.h"
 #include "../../UTILS/BitMath.h"
 #include "../../UTILS/STD_Types.h"
+#include "../../MCAL/DIO/DIO.h"
 
 #ifndef TIMER_2_H
 #define TIMER_2_H
@@ -39,6 +40,7 @@ void Timer_2_OverFlow_Int_Disable(void);
 void Timer_2_Output_Compare_Int_Disable(void);
 
 void Timer_2_PWM   (u8 Timer_2_OCV);    //Changes OCV in OCR
+void Timer_2_TCNT (u8 Timer_2_TCNT_Value); // Changes TCNT value
 
 
 void Timer_2_OverFlow_CallBack(void(*ptrfcn)(void));

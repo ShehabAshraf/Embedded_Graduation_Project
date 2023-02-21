@@ -105,6 +105,11 @@ void Timer_2_PWM   (u8 Timer_2_OCV)
     OCR2 = Timer_2_OCV;
 }
 
+void Timer_2_TCNT (u8 Timer_2_TCNT_Value)
+{
+    TCNT2 = Timer_2_TCNT_Value;
+}
+
 
 
 void (*Timer_2_OV_Genptr) (void) = NULL_PTR;

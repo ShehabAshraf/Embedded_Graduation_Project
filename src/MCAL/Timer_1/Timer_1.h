@@ -42,6 +42,12 @@ void Timer_1_Input_Capture_Int_Disable(void);
 void Timer_1_PWM_A   (u16 Timer_1_OCV_A);    
 void Timer_1_PWM_B   (u16 Timer_1_OCV_B);
 
+void Timer_1_OCR1A  (u16 Timer_1_OCR1A_Value);
+void Timer_1_OCR1B  (u16 Timer_1_OCR1B_Value);
+
+
+void Timer_1_ICR  (u16 Timer_1_ICR_Value);
+
 void Timer_1_OverFlow_CallBack(void(*ptrfcn)(void));
 void Timer_1_Output_Compare_A_CallBack(void(*ptrfcn)(void));
 void Timer_1_Output_Compare_B_CallBack(void(*ptrfcn)(void));

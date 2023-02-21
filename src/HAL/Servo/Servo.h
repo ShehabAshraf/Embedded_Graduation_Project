@@ -11,18 +11,9 @@
 #define Servo_Signal    DIO_D7
 
 
-void Servo_INIT(void)
-{
-    // DIO_PinMode();
-}
+void Servo_INIT(void);
 
-
-
-
-
-
-
-
-
+void Servo_Open_Door (void);
+void Servo_Close_Door (void);
 
 #endif

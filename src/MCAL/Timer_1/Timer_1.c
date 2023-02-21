@@ -44,9 +44,9 @@ void Timer_1_INIT_With_OCV(u8 WAVEFORM_MODE, u8 TIMER_1_OUTPUT_COMPARE_MODE_A, u
         break;
     }
 
-    /*Setting Prescaler (/1024)*/
-    SET_BIT(TCCR1B,CS10);
-    CLR_BIT(TCCR1B,CS11);
+    /*Setting Prescaler (/8)*/
+    CLR_BIT(TCCR1B,CS10);
+    SET_BIT(TCCR1B,CS11);
     CLR_BIT(TCCR1B,CS12);
 
 
@@ -93,10 +93,14 @@ void Timer_1_INIT_With_OCV(u8 WAVEFORM_MODE, u8 TIMER_1_OUTPUT_COMPARE_MODE_A, u
         case OCV_1_Clear:
             CLR_BIT(TCCR1B,COM1B0);
             SET_BIT(TCCR1B,COM1B1);
+            SET_BIT(TCCR1A,COM1A0);
+            SET_BIT(TCCR1A,COM1A1);
             break;
         case OCV_1_Set:
             SET_BIT(TCCR1B,COM1B0);
             SET_BIT(TCCR1B,COM1B1);
+            SET_BIT(TCCR1A,COM1A0);
+            SET_BIT(TCCR1A,COM1A1);
             break;
         default:
             break;
@@ -104,8 +108,8 @@ void Timer_1_INIT_With_OCV(u8 WAVEFORM_MODE, u8 TIMER_1_OUTPUT_COMPARE_MODE_A, u
 
 
     /*Clearing TCNTs Regs to start counting*/
-    TCNT1H = 0x00;
-    TCNT1L = 0x00;
+    TCNT1L=0x00;
+    TCNT1H=0x00;
 
 
     /*Make Output Compare Reg = Value Needed*/
@@ -188,6 +192,24 @@ void Timer_1_PWM_B   (u16 Timer_1_OCV_B)
     OCR1BH = (Timer_1_OCV_B >>8);
 }
 
+void Timer_1_OCR1A  (u16 Timer_1_OCR1A_Value)
+{
+    OCR1AL = (Timer_1_OCR1A_Value);
+    OCR1AH = (Timer_1_OCR1A_Value >> 8);
+}
+
+void Timer_1_OCR1B  (u16 Timer_1_OCR1B_Value)
+{
+    OCR1BL = (Timer_1_OCR1B_Value);
+    OCR1BH = (Timer_1_OCR1B_Value >> 8);
+}
+
+void Timer_1_ICR  (u16 Timer_1_ICR_Value)
+{
+    ICR1L = (Timer_1_ICR_Value);
+    ICR1H = (Timer_1_ICR_Value >> 8);
+}
+
 void (*Timer_1_OV_Genptr) (void) = NULL_PTR;
 void (*Timer_1_IC_Genptr) (void) = NULL_PTR;
 void (*Timer_1_OC_A_Genptr) (void) = NULL_PTR;
@@ -227,20 +249,24 @@ void Timer_1_Input_Capture_CallBack(void(*ptrfcn)(void))
 
 void __vector_6(void)
 {
+    SET_BIT(TIFR,ICF1);
     Timer_1_IC_Genptr();
 }
 
 void __vector_7(void)
 {
+    SET_BIT(TIFR,OCF1A);
     Timer_1_OC_A_Genptr();
 }
 
 void __vector_8(void)
 {
+    SET_BIT(TIFR,OCF1B);
     Timer_1_OC_B_Genptr();
 }
 
 void __vector_9(void)
 {
+    SET_BIT(TIFR,TOV1);
     Timer_1_OV_Genptr();
 }
