@@ -361,7 +361,7 @@
 int main()
 {
 LCD_Init();
-// Servo_INIT();
+Servo_INIT();
 KeyPad_Init();
 Alarm_Init();
 GIE_voidEnable();
@@ -387,35 +387,42 @@ EXT_INT0_void_Enable();
         if(KeyPad_GetRead() == '0')
         {
             Alarm_TOG();
+            LCD_WriteData("Alarm Toggled");
         }
         if(KeyPad_GetRead() == '1')
         {
             LED_SetLED(LED0);
             LED_SetLED(LED1);
             LED_SetLED(LED2);
+            LCD_WriteData("LEDs ON");
         }
         if(KeyPad_GetRead() == '2')
         {
             LED_ClearLED(LED0);
             LED_ClearLED(LED1);
             LED_ClearLED(LED2);
+            LCD_WriteData("LEDs OFF");
         }
         if(KeyPad_GetRead() == '3')
         {
             Servo_Open_Door();
+            LCD_WriteData("Door Opens");
         }
         if(KeyPad_GetRead() == '4')
         {
             Servo_Close_Door();
+            LCD_WriteData("Door Closes");
         }
         if(KeyPad_GetRead() == '5')
         {
             /*Checking temp*/
             Air_conditionar_check();
+            LCD_WriteData(Air_conditionar_check());
         }
         if(KeyPad_GetRead() == '6')
         {
             ending_sequance();
+            LCD_WriteData("Air Conditionar Off");
         }
         if(KeyPad_GetRead() == '7')
         {
