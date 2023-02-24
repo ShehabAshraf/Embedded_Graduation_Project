@@ -66,7 +66,7 @@ void Timer_2_INIT_With_OCV(u8 WAVEFORM_MODE, u8 TIMER_2_OUTPUT_COMPARE_MODE, u8 
 
 
     /*Clearing TCNT2 Reg to start Counting*/
-    TCNT2 = 200;
+    TCNT2 = 0x00;
 
 }
 

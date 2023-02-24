@@ -8,9 +8,9 @@ void Alarm_Init(void)
     // Timer_2_INIT_With_OCV(Normal,OCV_2_Normal,255);
     // Timer_2_OverFlow_Int_Enable();
     // Timer_2_OverFlow_CallBack(Alarm_Cycle);
-    Timer_1_INIT_With_OCV(Normal,OCV_1_Normal,OCV_1_Normal,65536,0);
-    Timer_1_OverFlow_Int_Enable();
-    Timer_1_OverFlow_CallBack(Alarm_Cycle);
+    // Timer_1_INIT_With_OCV(Normal,OCV_1_Normal,OCV_1_Normal,65536,0);
+    // Timer_1_OverFlow_Int_Enable();
+    // Timer_1_OverFlow_CallBack(Alarm_Cycle);
 }
 
 
