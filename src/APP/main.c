@@ -324,6 +324,8 @@
 #include "../HAL/LED/LEDs_Config.h"
 #include "../HAL/AirCond/AIRCOND.h"
 #include "../HAL/AirCond/AIRCOND_Config.h"
+#include "../MCAL/EEPROM/EEPROM.h"
+#include "../HAL/Dimmer/Dimmer.h"
 
 
 /******************************************/
@@ -335,9 +337,9 @@
 // Keypad 5 ==> Air Cond check
 // Keypad 6 ==> Air Cond Off
 // Keypad 9 ==> Dimmer on 
-// Keypad 7 ==> Dimmer high 
-// Keypad B ==> Dimmer Low
-// Keypad 8 ==> 
+// Keypad 7 ==> Dimmer Level 1 
+// Keypad B ==> Dimmer Level 2
+// Keypad 8 ==> Dimmer Level 3
 // Keypad A ==> 
 // Keypad C ==> 
 // Keypad D ==>
