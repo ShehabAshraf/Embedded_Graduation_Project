@@ -326,6 +326,8 @@
 #include "../HAL/AirCond/AIRCOND_Config.h"
 #include "../MCAL/EEPROM/EEPROM.h"
 #include "../HAL/Dimmer/Dimmer.h"
+#include "../MCAL/USART/USART.h"
+#include "../HAL/Bluetooth/Bluetooth.h"
 
 
 /******************************************/
@@ -371,7 +373,7 @@ Intialise_smart_home();
 LED_InitLED(LED0);
 LED_InitLED(LED1);
 LED_InitLED(LED2);
-
+toggleuart_blue();
 /*Ext Int makes conflict with alarm*/
 EXT_INT0_void_INIT(); 
 EXT_INT0_void_Enable();
@@ -387,45 +389,60 @@ EXT_INT0_void_Enable();
 
     while (1)
     {
-        if(KeyPad_GetRead() == '0')
+        // enter username 
+        // check usernames prev
+        // enter pass
+        // check
+        // change variable if admin
+        // 
+
+
+        if((KeyPad_GetRead() == '0') || (UART_RX() == '0'))
         {
             Alarm_TOG();
-            LCD_WriteData("Alarm Toggled");
+            LCD_GoTo(0,0);
+            LCD_WriteString("Alarm Toggled");
         }
-        if(KeyPad_GetRead() == '1')
+        if((KeyPad_GetRead() == '1') || (UART_RX() == '1'))
         {
             LED_SetLED(LED0);
             LED_SetLED(LED1);
-            LED_SetLED(LED2);
-            LCD_WriteData("LEDs ON");
+            LCD_GoTo(0,0);
+            LCD_WriteString("LEDs ON");
         }
-        if(KeyPad_GetRead() == '2')
+        if((KeyPad_GetRead() == '2') || (UART_RX() == '2'))
         {
             LED_ClearLED(LED0);
             LED_ClearLED(LED1);
-            LED_ClearLED(LED2);
-            LCD_WriteData("LEDs OFF");
+            LCD_GoTo(0,0);
+            LCD_WriteString("LEDs OFF");
         }
-        if(KeyPad_GetRead() == '3')
+        if((KeyPad_GetRead() == '4') || (UART_RX() == '3'))
         {
+            // if admin ==>
+            // if not admin lcd print no access
             Servo_Open_Door();
-            LCD_WriteData("Door Opens");
+            LCD_GoTo(0,0);
+            LCD_WriteString("Door Opens");
         }
-        if(KeyPad_GetRead() == '4')
+        if((KeyPad_GetRead() == '4') || (UART_RX() == '4'))
         {
             Servo_Close_Door();
-            LCD_WriteData("Door Closes");
+            LCD_GoTo(0,0);
+            LCD_WriteString("Door Closes");
         }
-        if(KeyPad_GetRead() == '5')
+        if((KeyPad_GetRead() == '5') || (UART_RX() == '5'))
         {
             /*Checking temp*/
             Air_conditionar_check();
-            LCD_WriteData(Air_conditionar_check());
+            LCD_GoTo(0,0);
+            LCD_WriteString(Air_conditionar_check());
         }
-        if(KeyPad_GetRead() == '6')
+        if((KeyPad_GetRead() == '6') || (UART_RX() == '6'))
         {
             ending_sequance();
-            LCD_WriteData("Air Conditionar Off");
+            LCD_GoTo(0,0);
+            LCD_WriteString("Air Conditionar Off");
         }
         if(KeyPad_GetRead() == '7')
         {
