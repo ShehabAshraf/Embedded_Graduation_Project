@@ -395,7 +395,8 @@ EXT_INT0_void_Enable();
         // check
         // change variable if admin
         // 
-
+        //Recieveeddata_onitor(KeyPad_GetRead());
+        //Recieveeddata_onitor(UART_RX());
 
         if((KeyPad_GetRead() == '0') || (UART_RX() == '0'))
         {
