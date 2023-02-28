@@ -6,10 +6,10 @@
 #include "../../MCAL/ADC/ADC.h"
 #include "AIRCOND_Config.h"
 
-void Air_conditioner_on(u8 OMega);
-void Air_conditioner_off();
-int Air_conditionar_check();
-void ending_sequance();
-void Intialise_smart_home();
+void Air_conditioner_on(u8 OMega);// turn on compressor
+void Air_conditioner_off();//turn off compressor
+int Air_conditionar_check();//check if air conditioner is needed to be turned off or on and return temp
+void ending_sequance();// preshutdown protcol
+void Intialise_smart_home();//start protocol
 
 #endif

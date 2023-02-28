@@ -371,6 +371,7 @@ Intialise_smart_home();
 LED_InitLED(LED0);
 LED_InitLED(LED1);
 LED_InitLED(LED2);
+
 /*Ext Int makes conflict with alarm*/
 EXT_INT0_void_INIT(); 
 EXT_INT0_void_Enable();
