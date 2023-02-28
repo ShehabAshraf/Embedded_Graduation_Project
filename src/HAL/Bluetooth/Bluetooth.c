@@ -77,7 +77,7 @@ default:
  //printf("error, no operation registered")
  }}///////////////////else the data will be stored
 else if(RECEIDATA =='#' && Pas_name == 0){ Pas_name=1; ptr_pass_name[C_arr]='#';C_arr=0;}//toggle pass name to go back to normal mode and send indication to show that array is complete
-if(ptr_pass_name!=NULL){
+if(ptr_pass_name!=NULL && RECEIDATA!=0){
  ptr_pass_name[C_arr]=RECEIDATA;//save data in pt
     UART_TX(RECEIDATA);//echo
  C_arr++;}//increment
