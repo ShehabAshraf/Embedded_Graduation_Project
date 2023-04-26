@@ -25,7 +25,8 @@ void KeyPad_Init(){
 
 
 u8 KeyPad_GetRead(){
-	volatile u8 reading =0;
+	volatile u8 reading = 0;
+	volatile static u8 lastRead;
 
 	if(reading == 0){
 		DIO_DigitalWritePin(KEYPAD_C0, LOW); 		_delay_ms(1);
