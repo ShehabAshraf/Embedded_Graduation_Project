@@ -28,6 +28,9 @@ u8 KeyPad_GetRead(){
 	volatile u8 reading = 0;
 	volatile static u8 lastRead;
 
+	
+
+
 	if(reading == 0){
 		DIO_DigitalWritePin(KEYPAD_C0, LOW); 		_delay_ms(1);
 		if		(DIO_DigitalReadPin(KEYPAD_R0) == LOW){	reading = '1';}	
@@ -60,6 +63,15 @@ u8 KeyPad_GetRead(){
 		else if	(DIO_DigitalReadPin(KEYPAD_R3) == LOW){	reading = 'D';}	
 		DIO_DigitalWritePin(KEYPAD_C3, HIGH); 		
 	}
+	
+	if (lastRead == reading)
+	{
+		reading = 0;
+	}
+	
+
+	lastRead = reading;
+	
 
 	return reading;
 
